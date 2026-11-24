@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raghuveer · Little Inventor</title>
+  <meta name="description" content="Raghuveer is a 5th grade student and little inventor who loves building robots and smart gadgets." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>" />
+  <style>
+    :root {
+      --bg: #0d2b52;
+      --bg-2: #123866;
+      --grid: rgba(255, 255, 255, 0.07);
+      --ink: #eaf3ff;
+      --muted: #a9c3e6;
+      --accent: #ffcf3f;
+      --accent-2: #ff7a59;
+      --accent-3: #5ee0b5;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.18);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Fredoka", system-ui, sans-serif;
+      color: var(--ink);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    .mono { font-family: "Space Mono", monospace; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(13, 43, 82, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px dashed var(--card-border);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .logo { font-weight: 700; font-size: 1.2rem; color: var(--accent); text-decoration: none; }
+    nav ul { list-style: none; display: flex; gap: 18px; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+    nav a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero { padding: 80px 0 60px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+    .tag {
+      display: inline-block; font-size: 0.8rem; letter-spacing: 0.08em;
+      color: var(--accent-3); border: 1px dashed var(--accent-3);
+      padding: 4px 12px; border-radius: 999px; margin-bottom: 18px;
+    }
+    h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.1; font-weight: 700; }
+    h1 .hl { color: var(--accent); }
+    .hero p { font-size: 1.2rem; color: var(--muted); margin: 18px 0 28px; max-width: 32ch; }
+    .btn {
+      display: inline-block; background: var(--accent); color: #1b1b1b;
+      font-weight: 600; padding: 12px 24px; border-radius: 14px; text-decoration: none;
+      box-shadow: 0 5px 0 #c99a12; transition: transform .1s, box-shadow .1s;
+    }
+    .btn:hover { transform: translateY(2px); box-shadow: 0 3px 0 #c99a12; }
+    .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--card-border); box-shadow: none; margin-left: 10px; }
+
+    /* Robot avatar */
+    .robot { width: 100%; max-width: 300px; margin: 0 auto; display: block; animation: bob 3s ease-in-out infinite; }
+    @keyframes bob { 50% { transform: translateY(-10px); } }
+    .robot .eye { animation: blink 4s infinite; transform-origin: center; transform-box: fill-box; }
+    @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+    .gear { transform-origin: center; transform-box: fill-box; animation: spin 8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Sections */
+    section { padding: 60px 0; }
+    h2 { font-size: 2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+    h2 .num { font-family: "Space Mono", monospace; font-size: 0.9rem; color: var(--accent-2); }
+    .sub { color: var(--muted); margin-bottom: 30px; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .card {
+      background: var(--card); border: 1px solid var(--card-border); border-radius: 18px;
+      padding: 24px; transition: transform .2s, border-color .2s;
+    }
+    .card:hover { transform: translateY(-4px) rotate(-0.5deg); border-color: var(--accent); }
+    .card .icon { font-size: 2.2rem; margin-bottom: 10px; }
+    .card h3 { font-size: 1.25rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); }
+
+    .about-box {
+      background: var(--bg-2); border: 2px dashed var(--card-border); border-radius: 20px;
+      padding: 30px; font-size: 1.15rem; position: relative;
+    }
+    .about-box::before {
+      content: "NOTE"; position: absolute; top: -12px; left: 24px;
+      background: var(--accent-2); color: #fff; font-family: "Space Mono", monospace;
+      font-size: 0.75rem; padding: 2px 10px; border-radius: 6px;
+    }
+    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .fact { background: rgba(94, 224, 181, 0.12); color: var(--accent-3); padding: 6px 14px; border-radius: 999px; font-size: 0.95rem; }
+
+    .project { border-style: dashed; }
+    .project .status { font-family: "Space Mono", monospace; font-size: 0.75rem; color: var(--accent); }
+
+    footer { border-top: 1px dashed var(--card-border); padding: 30px 0 40px; text-align: center; color: var(--muted); }
+    footer a { color: var(--accent); }
+
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; padding-top: 40px; text-align: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .robot { max-width: 200px; grid-row: 1; }
+      nav ul { gap: 12px; font-size: 0.9rem; }
+      .btn.ghost { margin-left: 0; margin-top: 12px; }
+    }
+    @media (max-width: 420px) { nav ul li:nth-child(n+3) { display: none; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo">⚙ Raghuveer</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#learning">Learning</a></li>
+        <li><a href="#build">Build</a></li>
+        <li><a href="#lab">Lab</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="wrap hero">
+    <div>
+      <span class="tag mono">STUDENT · LITTLE INVENTOR</span>
+      <h1>Hi, I'm <span class="hl">Raghuveer</span>!</h1>
+      <p>I'm a 5th grader who loves learning new things and building cool stuff.</p>
+      <a class="btn" href="#lab">See my inventions</a>
+      <a class="btn ghost" href="https://github.com/rv-invent" target="_blank" rel="noopener">My GitHub</a>
+    </div>
+    <svg class="robot" viewBox="0 0 200 220" aria-label="Friendly robot illustration" role="img">
+      <line x1="100" y1="20" x2="100" y2="45" stroke="#a9c3e6" stroke-width="4"/>
+      <circle cx="100" cy="16" r="8" fill="#ff7a59"/>
+      <rect x="45" y="45" width="110" height="80" rx="20" fill="#eaf3ff"/>
+      <rect x="58" y="60" width="84" height="45" rx="12" fill="#0d2b52"/>
+      <circle class="eye" cx="82" cy="82" r="9" fill="#5ee0b5"/>
+      <circle class="eye" cx="118" cy="82" r="9" fill="#5ee0b5"/>
+      <rect x="35" y="72" width="10" height="26" rx="4" fill="#a9c3e6"/>
+      <rect x="155" y="72" width="10" height="26" rx="4" fill="#a9c3e6"/>
+      <rect x="55" y="132" width="90" height="70" rx="16" fill="#ffcf3f"/>
+      <g class="gear">
+        <circle cx="100" cy="167" r="16" fill="none" stroke="#1b1b1b" stroke-width="6" stroke-dasharray="7 5"/>
+        <circle cx="100" cy="167" r="6" fill="#1b1b1b"/>
+      </g>
+      <rect x="25" y="140" width="24" height="12" rx="6" fill="#eaf3ff"/>
+      <rect x="151" y="140" width="24" height="12" rx="6" fill="#eaf3ff"/>
+      <rect x="68" y="202" width="20" height="14" rx="4" fill="#a9c3e6"/>
+      <rect x="112" y="202" width="20" height="14" rx="4" fill="#a9c3e6"/>
+    </svg>
+  </header>
+
+  <main class="wrap">
+    <section id="about">
+      <h2><span class="num">01</span> About me</h2>
+      <p class="sub">A quick look at who I am.</p>
+      <div class="about-box">
+        I'm a curious learner who likes to figure out how things work, and then build my own!
+        I dream up robots and smart gadgets, and I'm always learning something new to help me make them real.
+        <div class="facts">
+          <span class="fact">🎒 5th Grader</span>
+          <span class="fact">💡 Little Inventor</span>
+          <span class="fact">🤖 Robot Fan</span>
+          <span class="fact">📚 Always Learning</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <h2><span class="num">02</span> What I'm learning</h2>
+      <p class="sub">I like learning everything. These are my favorites right now.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">➗</div>
+          <h3>Math</h3>
+          <p>Numbers, patterns and puzzles: the secret language of every invention.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🗣️</div>
+          <h3>Languages</h3>
+          <p>Learning new languages to talk with more people around the world.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💻</div>
+          <h3>Technology</h3>
+          <p>Coding, electronics and how computers and machines really work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="build">
+      <h2><span class="num">03</span> Things I love to build</h2>
+      <p class="sub">If I can imagine it, I want to try building it.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🤖</div>
+          <h3>Robots</h3>
+          <p>Machines that move, sense the world and follow my commands.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📡</div>
+          <h3>Smart Gadgets</h3>
+          <p>Everyday things made smarter with sensors, lights and code.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛠️</div>
+          <h3>New Ideas</h3>
+          <p>Fun experiments and inventions nobody has made yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab">
+      <h2><span class="num">04</span> Invention lab</h2>
+      <p class="sub">My projects will show up here as I build them.</p>
+      <div class="cards">
+        <div class="card project">
+          <span class="status">STATUS: COMING SOON</span>
+          <h3>Project #1</h3>
+          <p>My first invention is on the workbench. Check back soon!</p>
+        </div>
+        <div class="card project">
+          <span class="status">STATUS: IDEA</span>
+          <h3>Project #2</h3>
+          <p>Still sketching this one in my notebook.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Built by Raghuveer ⚙ Find my code on <a href="https://github.com/rv-invent" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>
